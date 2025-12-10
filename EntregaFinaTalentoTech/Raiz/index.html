@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PC Tech | Hardware Profesional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/estilo.css">
+</head>
+<body>
+
+  <nav class="navbar-glass">
+    <div class="nav-content">
+      <a href="index.html" class="logo-section">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+        <span class="logo-text">PC Tech</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#inicio" class="nav-link">Inicio</a></li>
+        <li><a href="#catalogo" class="nav-link">Catálogo</a></li>
+        <li><a href="#arma-tu-pc" class="nav-link">Armador</a></li>
+        <li><a href="paradigmas.html" class="nav-link" style="color:var(--secondary);">Paradigmas</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="cart-wrapper" onclick="irA('carrito')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <span id="carritoContador" class="cart-badge">0</span>
+        </div>
+        
+        <div id="userArea" class="user-area">
+            <button id="btnLoginBtn" class="btn-login-nav" onclick="abrirModal('loginModal')">INGRESAR</button>
+            <div id="userInfo" style="display:none; align-items:center; gap:10px;">
+                <span id="userNameDisplay" style="color:white; font-weight:600;"></span>
+                <button onclick="salir()" class="btn-logout" style="background:none; border:none; color:#aaa; cursor:pointer;">Salir</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header id="inicio" class="hero-section">
+      <h1 class="hero-title">PC TECH <span>STORE</span></h1>
+      <p class="hero-subtitle">Especialistas en Hardware High-End. Armamos tu equipo con los mejores componentes del mercado.</p>
+      <div class="hero-badges">
+          <span class="badge-tech">Envíos a todo el país</span>
+          <span class="badge-tech">Garantía Oficial</span>
+          <span class="badge-tech">Soporte Técnico</span>
+      </div>
+  </header>
+
+  <main>
+    <section id="catalogo" class="main-section">
+      <div class="section-title">
+        <h2>Catálogo de Productos</h2>
+        <div class="underline"></div>
+      </div>
+      <div id="catalogoContainer"></div>
+    </section>
+
+    <section id="arma-tu-pc" class="main-section">
+      <div class="section-title">
+        <h2>Armador de PC</h2>
+        <div class="underline"></div>
+      </div>
+      
+      <div class="config-layout">
+        <div>
+             <div class="config-grid-buttons">
+               <button class="btn-categoria" onclick="abrirConfigurador('procesador')">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
+                 <span class="text">CPU</span>
+               </button>
+               <button class="btn-categoria" onclick="abrirConfigurador('motherboard')">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"></rect><path d="M6 6h4v4H6z"></path><path d="M6 14h4v4H6z"></path><path d="M14 6h4v4h-4z"></path></svg>
+                 <span class="text">Mother</span>
+               </button>
+               <button class="btn-categoria" onclick="abrirConfigurador('memoria')">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12h20"></path><path d="M2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6"></path><path d="M2 12V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6"></path></svg>
+                 <span class="text">RAM</span>
+               </button>
+               <button class="btn-categoria" onclick="abrirConfigurador('tarjetaGrafica')">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+                 <span class="text">GPU</span>
+               </button>
+               <button class="btn-categoria" onclick="abrirConfigurador('gabinete')">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                 <span class="text">Case</span>
+               </button>
+               <button class="btn-categoria" onclick="limpiarArmador()" style="border-color:var(--primary);">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                 <span class="text" style="color:var(--primary);">Reiniciar</span>
+               </button>
+            </div>
+        </div>
+        
+        <div class="config-resumen">
+            <div class="resumen-header">
+                <h3>Mi Configuración</h3>
+            </div>
+            <div id="listaComponentes" class="resumen-lista">
+                <p class="empty-build-msg">Selecciona componentes para armar tu PC.</p>
+            </div>
+            <div class="total-armador">
+                TOTAL: <span id="totalPresupuesto" style="color:var(--secondary);">$0</span>
+            </div>
+            <button class="btn-add full" style="margin-top:20px; font-size:1rem;" onclick="agregarPresupuestoAlCarrito()">
+                AGREGAR AL CARRITO
+            </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="carrito" class="main-section">
+      <div class="section-title">
+        <h2>Carrito de Compras</h2>
+        <div class="underline"></div>
+      </div>
+      
+      <div class="carrito-container-pro">
+          <div class="carrito-header">
+              <span>Producto</span>
+              <span>Precio</span>
+              <span>Acción</span>
+          </div>
+          
+          <div id="carritoItems"></div>
+          
+          <div class="carrito-footer">
+             <div class="total-final">Total a Pagar: <span id="totalCarrito">$0</span></div>
+             <div class="carrito-actions">
+                 <button class="btn-outline" onclick="vaciarCarrito()">Vaciar Carrito</button>
+                 <button class="btn-add" onclick="finalizarCompra()">FINALIZAR COMPRA</button>
+             </div>
+          </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-pro">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>Sobre PC Tech Store</h4>
+            <p style="font-size: 0.95rem; line-height: 1.7; color: #b0b0b0;">
+                Líderes en la arquitectura de sistemas de alto rendimiento en Argentina. 
+                Fusionamos ingeniería de precisión con las marcas más prestigiosas del mercado global (ASUS, MSI, NVIDIA).
+            </p>
+            <div class="location-tag" style="margin-top: 15px; color: var(--secondary);">
+                📍 Buenos Aires, Argentina | Envíos Certificados
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Información Legal</h4>
+            <ul>
+                <li><a href="terminos.html">Términos y Condiciones</a></li>
+                <li><a href="privacidad.html">Política de Privacidad</a></li>
+                <li><a href="defensa.html">Defensa al Consumidor</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Ayuda al Cliente</h4>
+            <ul>
+                <li><a href="ayuda.html">Centro de Ayuda y FAQ</a></li>
+                <li><a href="seguimiento.html">Seguimiento de Envío</a></li>
+                <li><a href="garantias.html">Garantías y RMA</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 PC Tech Store S.A. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <div id="categoriaModal" class="modal-backdrop">
+    <div class="modal-glass">
+      <div class="modal-header">
+          <h3 id="categoriaTitulo">SELECCIONAR</h3>
+          <button onclick="cerrarModal('categoriaModal')" class="close-btn">&times;</button>
+      </div>
+      <div id="categoriaProductos" class="modal-grid"></div>
+    </div>
+  </div>
+
+  <div id="loginModal" class="modal-backdrop">
+    <div class="modal-glass small">
+      <h3>INICIAR SESIÓN</h3>
+      <input type="email" id="logEmail" placeholder="Ingresa tu email" class="input-pro">
+      <button class="btn-add full" onclick="login(document.getElementById('logEmail').value)">INGRESAR</button>
+      <button onclick="cerrarModal('loginModal')" class="btn-text" style="margin-top:10px; background:none; border:none; color:#aaa; cursor:pointer;">Cancelar</button>
+    </div>
+  </div>
+
+  <div id="productoModal" class="modal-backdrop">
+    <div class="modal-glass large-modal">
+        <button onclick="cerrarModal('productoModal')" class="close-btn-float">&times;</button>
+        <div id="detalleProductoContenido" class="detalle-layout"></div>
+    </div>
+  </div>
+
+  <div id="checkoutModal" class="modal-backdrop">
+    <div class="modal-glass">
+        <div class="modal-header">
+            <h3>MEDIOS DE PAGO</h3>
+            <button onclick="cerrarModal('checkoutModal')" class="close-btn">&times;</button>
+        </div>
+        
+        <p style="margin-bottom: 20px; color: #ccc;">Seleccioná como querés abonar tu pedido. Una vez realizado el pago, envíanos el comprobante.</p>
+
+        <div class="payment-grid">
+            <div class="payment-card">
+                <div class="payment-icon">🏦</div>
+                <h4>Transferencia Bancaria</h4>
+                <p class="payment-desc">Transferí sin costo desde cualquier banco o billetera virtual.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Banco:</strong> SANTANDER RÍO</p>
+                    <p><strong>Alias:</strong> <span class="copiable">PCTECH.HARDWARE.ARG</span></p>
+                    <p><strong>CBU:</strong> 072000072000000129933</p>
+                    <p><strong>Titular:</strong> PC TECH STORE S.A.</p>
+                    <p><strong>CUIT:</strong> 30-71223344-9</p>
+                </div>
+            </div>
+
+            <div class="payment-card">
+                <div class="payment-icon">💸</div>
+                <h4>Pago en Efectivo</h4>
+                <p class="payment-desc">Acercate a cualquier sucursal de Rapipago o PagoFácil.</p>
+                
+                <div class="highlight-box">
+                    <p style="margin-bottom:10px;">Dictale el siguiente código al cajero:</p>
+                    <div class="rapipago-code">4882 - 9911 - 2233</div>
+                    <p style="font-size: 0.8rem; margin-top: 10px; color: #aaa;">
+                        * La acreditación es inmediata. <br>
+                        * Tenés 48hs para realizar el pago antes que se cancele el pedido.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-add full" style="margin-top: 20px;" onclick="confirmarPago()">
+            YA REALICÉ EL PAGO
+        </button>
+    </div>
+  </div>
+
+  <div id="notificacion" class="notificacion-glass">
+      <span id="notificacionTexto">Mensaje del sistema</span>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

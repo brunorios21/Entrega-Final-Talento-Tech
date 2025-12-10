@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seguimiento de Envío | PC Tech Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* --- ESTILOS GENERALES --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #eef2f3; color: #333; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* Header Compacto */
+    header { background: #1a1a2e; color: white; padding: 30px 0; text-align: center; }
+    
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; flex: 1; }
+
+    /* Tarjeta Principal */
+    .tracking-card {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        margin-top: -30px; /* Efecto flotante sobre el header */
+    }
+
+    h2 { text-align: center; color: #16213e; margin-bottom: 10px; }
+    .subtitle { text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 30px; }
+
+    /* Formulario Estilizado */
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-weight: 600; margin-bottom: 8px; color: #16213e; font-size: 0.9rem; }
+    input {
+        width: 100%;
+        padding: 14px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border 0.3s;
+        outline: none;
+    }
+    input:focus { border-color: #e94560; }
+
+    .btn-track {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(90deg, #16213e 0%, #e94560 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-track:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3); }
+
+    /* --- RESULTADOS (TIMELINE) --- */
+    #result-area { display: none; margin-top: 40px; border-top: 1px solid #eee; padding-top: 30px; animation: fadeIn 0.5s ease; }
+    
+    .order-info { 
+        background: #f8f9fa; 
+        padding: 15px; 
+        border-radius: 8px; 
+        margin-bottom: 25px; 
+        font-size: 0.9rem; 
+        display: flex; 
+        justify-content: space-between;
+    }
+
+    /* Línea de Tiempo Vertical */
+    .timeline { position: relative; padding-left: 30px; }
+    .timeline::before {
+        content: ''; position: absolute; left: 7px; top: 5px; bottom: 0; width: 2px; background: #e0e0e0;
+    }
+    
+    .timeline-item { position: relative; margin-bottom: 30px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    
+    .timeline-dot {
+        position: absolute; left: -29px; top: 0;
+        width: 16px; height: 16px; border-radius: 50%;
+        background: #ccc; border: 3px solid white;
+        box-shadow: 0 0 0 2px #ccc;
+        z-index: 2;
+    }
+    
+    /* Estado Activo (Verde/Rosa) */
+    .item-active .timeline-dot {
+        background: #e94560; 
+        box-shadow: 0 0 0 2px #e94560;
+    }
+    .item-active h4 { color: #e94560; }
+
+    .timeline-content h4 { margin: 0 0 5px; font-size: 1rem; }
+    .timeline-content p { margin: 0; font-size: 0.85rem; color: #777; }
+
+    /* Animaciones */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .loading-spinner {
+        display: none; text-align: center; margin-top: 20px; color: #e94560; font-weight: 600;
+    }
+
+    .back-link { display: block; text-align: center; margin-top: 20px; color: #666; text-decoration: none; font-size: 0.9rem; }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>PC Tech Store</h1>
+  </header>
+
+  <div class="container">
+    <div class="tracking-card">
+      <h2>Seguimiento de Envíos</h2>
+      <p class="subtitle">Ingresa tu número de guía para ver dónde está tu paquete.</p>
+      
+      <form id="trackForm">
+        <div class="form-group">
+          <label>Número de Seguimiento (Ej: AR-2025)</label>
+          <input type="text" id="trackingCode" placeholder="Ingresa el código aquí" required>
+        </div>
+        <button type="submit" class="btn-track">🔍 Buscar Paquete</button>
+      </form>
+
+      <div class="loading-spinner" id="loader">Buscando en el sistema satelital...</div>
+
+      <div id="result-area">
+        <div class="order-info">
+          <span><strong>Orden:</strong> <span id="display-code"></span></span>
+          <span style="color: green;">● En Tránsito</span>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item item-active">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>En Centro de Distribución Zonal</h4>
+              <p>Buenos Aires, Zona Norte - Hoy, 08:30 AM</p>
+            </div>
+          </div>
+
+          <div class="timeline-item item-active">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>Paquete Clasificado</h4>
+              <p>Planta Logística Central - Ayer, 22:15 PM</p>
+            </div>
+          </div>
+
+          <div class="timeline-item item-active">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>Retirado por el Correo</h4>
+              <p>PC Tech Store Depósito - Ayer, 18:00 PM</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>Orden Confirmada</h4>
+              <p>Tienda Online - Ayer, 14:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <a href="index.html" class="back-link">Volver al inicio</a>
+    </div>
+  </div>
+
+  <script>
+    // Pequeño script para simular funcionalidad real
+    const form = document.getElementById('trackForm');
+    const loader = document.getElementById('loader');
+    const resultArea = document.getElementById('result-area');
+    const displayCode = document.getElementById('display-code');
+    const inputCode = document.getElementById('trackingCode');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Ocultar resultados previos si los hay
+      resultArea.style.display = 'none';
+      
+      // Mostrar "cargando"
+      loader.style.display = 'block';
+      
+      // Simular espera de 1.5 segundos
+      setTimeout(() => {
+        loader.style.display = 'none';
+        displayCode.textContent = inputCode.value.toUpperCase(); // Pone el código que escribiste
+        resultArea.style.display = 'block';
+      }, 1500);
+    });
+  </script>
+
+</body>
+</html>
