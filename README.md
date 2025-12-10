@@ -148,24 +148,76 @@ Si quieres migrar la carga de `productos` a una llamada fetch desde `data/produc
 
 ---
 
-## Personalización visual para GitHub
+## Snippets útiles
 
-Consejos para que el README se vea atractivo en GitHub:
+En lugar de consejos visuales, aquí tenés fragmentos de código que podés copiar y usar directamente en el proyecto para implementar funcionalidades relacionadas a la presentación, carga de datos y despliegue.
 
-- Añadir una captura de pantalla `assets/images/preview.png` y referenciarla al inicio del README con `![Preview](assets/images/preview.png)` para que GitHub muestre la imagen.
-- Incluir badges (estado, licencia) en la cabecera. Ejemplo:
+- Cargar los productos desde `data/productos.json` (reemplaza el array declarado dentro de `js/script.js`):
 
-```markdown
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+```javascript
+// En js/script.js: eliminar/omitir el array inline y usar fetch
+let productos = [];
+
+fetch('data/productos.json')
+	.then(res => res.json())
+	.then(data => {
+		productos = data;
+		mostrarCatalogo(); // función existente que renderiza usando `productos`
+	})
+	.catch(err => console.error('Error cargando productos:', err));
 ```
 
-- Crear un pequeño GIF o PNG que muestre el armador funcionando y añadirlo como `docs/demo.gif` o en `assets/images/`.
-- Usar secciones claras y una tabla de contenido (ya incluida) para navegación rápida.
+- Ejemplo simple de renderizado (si querés un render alternativo):
 
-Estructura visual recomendada en GitHub: título grande, badges, una imagen de preview, resumen, y luego detalles técnicos. El archivo `README.md` que generé ya sigue este orden.
+```javascript
+function crearCardProducto(prod) {
+	const card = document.createElement('div');
+	card.className = 'card-glass';
+	card.innerHTML = `
+		<div class="card-image-container" onclick="abrirDetalleProducto(${prod.id})">
+			<img src="${prod.imagen}" alt="${prod.nombre}" onerror="this.src='https://via.placeholder.com/300?text=No+Img'">
+		</div>
+		<div class="card-content">
+			<h3>${prod.nombre}</h3>
+			<div class="card-footer">
+				<div class="price-box">$${prod.precio.toLocaleString()}</div>
+				<button class="btn-add" onclick="agregarAlCarrito(${prod.id})">AGREGAR</button>
+			</div>
+		</div>`;
+	return card;
+}
+```
+
+- Metatags para generar una vista previa (agregalas en el `<head>` de `index.html`):
+
+```html
+<meta property="og:title" content="PC Tech Store - Hardware Profesional">
+<meta property="og:description" content="Catálogo de hardware, armador de PC y carrito de compras.">
+<meta property="og:image" content="https://raw.githubusercontent.com/USUARIO/REPO/main/assets/images/preview.png">
+<meta name="twitter:card" content="summary_large_image">
+```
+
+- Workflow básico para desplegar en GitHub Pages (archivo: `.github/workflows/gh-pages.yml`). Este ejemplo usa `peaceiris/actions-gh-pages` para publicar la rama `main` al sitio Pages:
+
+```yaml
+name: Deploy to GitHub Pages
+on:
+	push:
+		branches: [ main ]
+jobs:
+	deploy:
+		runs-on: ubuntu-latest
+		steps:
+			- uses: actions/checkout@v4
+			- uses: peaceiris/actions-gh-pages@v3
+				with:
+					github_token: ${{ secrets.GITHUB_TOKEN }}
+					publish_dir: ./
+```
+
+Nota: reemplazá `https://raw.githubusercontent.com/USUARIO/REPO/main/assets/images/preview.png` por la URL real en tu repo y ajustá `publish_dir` si publicás desde `docs/`.
 
 ---
-
 ## Notas de implementación y recomendaciones (estudiante)
 
 - El archivo `js/script.js` declara un array `productos` dentro del propio script y también existe `data/productos.json`. Para mantener una fuente única de verdad, recomiendo usar `fetch('data/productos.json')` y luego renderizar los productos, así evitarás duplicados de datos.
@@ -190,6 +242,8 @@ Si proponés cambios grandes (por ejemplo integrar un build tool o migrar a un f
 ## Licencia
 
 Revisar el archivo `LICENSE` incluido en la raíz del proyecto.
+
+
 
 
 
