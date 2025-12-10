@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro de Ayuda | PC Tech Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    /* --- ESTILOS GENERALES --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+        font-family: 'Inter', sans-serif; 
+        background-color: #f4f7f6; 
+        color: #333; 
+        line-height: 1.6; 
+    }
+
+    /* Header Impactante */
+    header {
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        color: white;
+        padding: 80px 20px;
+        text-align: center;
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    header h1 { font-weight: 800; font-size: 3rem; letter-spacing: -1px; margin-bottom: 10px; }
+    header p { font-size: 1.2rem; opacity: 0.8; font-weight: 300; }
+
+    /* Contenedor Principal */
+    .container { max-width: 900px; margin: -50px auto 50px; padding: 0 20px; position: relative; z-index: 10; }
+
+    /* Botón Volver */
+    .back-btn {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        background: rgba(255,255,255,0.1);
+        padding: 8px 16px;
+        border-radius: 20px;
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+
+    /* Tarjetas de Preguntas (Acordeón Moderno) */
+    .faq-section {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    }
+    
+    h2 { color: #302b63; margin-bottom: 30px; font-size: 1.8rem; border-left: 5px solid #c33764; padding-left: 15px; }
+
+    details {
+        margin-bottom: 15px;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+    details:hover { border-color: #c33764; box-shadow: 0 5px 15px rgba(195, 55, 100, 0.1); }
+    
+    summary {
+        padding: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fff;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-size: 1.5rem; color: #c33764; font-weight: 800; transition: transform 0.3s; }
+    
+    details[open] summary { background: #fdf2f5; color: #c33764; }
+    details[open] summary::after { content: '-'; transform: rotate(180deg); }
+    
+    .faq-answer { padding: 20px; border-top: 1px solid #f0f0f0; color: #555; font-size: 0.95rem; }
+
+    /* Sección de Contacto Visual */
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 40px;
+    }
+    .contact-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: transform 0.3s;
+    }
+    .contact-card:hover { transform: translateY(-5px); }
+    .icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+    .contact-title { font-weight: 700; color: #302b63; display: block; margin-bottom: 5px; }
+    
+    /* Footer */
+    footer { text-align: center; padding: 40px; color: #777; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>¿Cómo podemos ayudarte?</h1>
+    <p>Respuestas rápidas para tus dudas sobre hardware.</p>
+  </header>
+
+  <div class="container">
+    <a href="index.html" class="back-btn">← Volver al Inicio</a>
+
+    <div class="faq-section">
+      <h2>Preguntas Frecuentes</h2>
+
+      <details open>
+        <summary>💳 ¿Qué formas de pago aceptan?</summary>
+        <div class="faq-answer">
+          Aceptamos todas las tarjetas de crédito y débito. También puedes pagar con Mercado Pago, QR, o Transferencia Bancaria (esta última tiene un <strong>10% de descuento</strong> automático al finalizar la compra).
+        </div>
+      </details>
+
+      <details>
+        <summary>🚚 ¿Cuánto tarda en llegar mi PC?</summary>
+        <div class="faq-answer">
+          Para componentes sueltos, el despacho es en 24hs. Para PCs armadas, el tiempo de ensamblado y testeo es de 48 a 72hs hábiles. Una vez despachado, el correo demora entre 3 a 5 días dependiendo de tu provincia.
+        </div>
+      </details>
+
+      <details>
+        <summary>🔧 ¿La PC viene armada y lista para usar?</summary>
+        <div class="faq-answer">
+          ¡Sí! Si compraste todos los componentes con la opción "Armado de PC", te llega ensamblada, con gestión de cables profesional y con el sistema operativo instalado (versión de prueba) y drivers actualizados.
+        </div>
+      </details>
+
+      <details>
+        <summary>🛡️ ¿Cómo funciona la garantía?</summary>
+        <div class="faq-answer">
+          Todos los productos tienen garantía oficial. Conserva la caja y la factura. Si falla algo, generas un ticket de RMA y nosotros gestionamos el cambio o reparación directamente con la marca.
+        </div>
+      </details>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <span class="icon">💬</span>
+        <span class="contact-title">WhatsApp Ventas</span>
+        <p>+54 11 9999-8888</p>
+      </div>
+      <div class="contact-card">
+        <span class="icon">📧</span>
+        <span class="contact-title">Soporte Técnico</span>
+        <p>soporte@pctech.com</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 PC Tech Store - Tu tienda gamer de confianza.</p>
+  </footer>
+
+</body>
+</html>
