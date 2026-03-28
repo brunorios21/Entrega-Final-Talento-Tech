@@ -4,6 +4,117 @@ Este repositorio contiene un proyecto de maqueta de tienda de hardware llamada "
 
 Este README está escrito en un tono de estudiante y documenta la estructura, las fuentes de código y las instrucciones para ejecutar y personalizar el proyecto. Está pensado para mostrarse correctamente en la vista principal de un repositorio GitHub.
 
+## Vista General del Sistema
+
+A continuación se presentan las principales pantallas del sistema, junto con una descripción técnica de cada módulo implementado.
+
+---
+
+### Página de Inicio
+
+<p align="center">
+  <img src="Presentacion1.png" width="800"/>
+</p>
+
+**Descripción técnica:**
+
+- Se implementa una **landing page estática** con diseño responsive.
+- Presenta la identidad del sistema "PC Tech Store".
+- Incluye una barra de navegación con acceso a:
+  - Inicio
+  - Catálogo
+  - Armador de PC
+  - Secciones informativas
+- Se destacan características del servicio como:
+  - Envíos
+  - Garantía
+  - Soporte técnico
+- Uso de **HTML semántico + CSS moderno (gradientes, flex/grid)**.
+
+---
+
+### Catálogo de Productos
+
+<p align="center">
+  <img src="Catalogo2.png" width="800"/>
+</p>
+
+**Descripción técnica:**
+
+- Renderizado dinámico de productos a partir de un archivo `JSON`.
+- Cada producto se representa mediante un **componente visual tipo card**.
+- Contiene:
+  - Imagen del producto
+  - Nombre
+  - Precio
+  - Botón de acción
+- Implementación de eventos con **JavaScript** para:
+  - Agregar productos al carrito
+  - Abrir vista detallada
+- Separación clara entre **datos (JSON) y presentación (DOM)**.
+
+---
+
+### Modal de Especificaciones
+
+<p align="center">
+  <img src="Especificaciones3.png" width="800"/>
+</p>
+
+**Descripción técnica:**
+
+- Modal dinámico generado mediante manipulación del DOM.
+- Muestra información detallada del producto seleccionado:
+  - Especificaciones técnicas
+  - Compatibilidad
+  - Precio actualizado
+- Uso de:
+  - **Eventos (click)**
+  - **Renderizado condicional**
+- Permite interacción directa:
+  - Agregar al carrito desde el modal
+- Mejora la experiencia de usuario sin recargar la página.
+
+---
+
+### Armador de PC
+
+<p align="center">
+  <img src="ArmadorDePC4.png" width="800"/>
+</p>
+
+**Descripción técnica:**
+
+- Módulo interactivo para selección de componentes:
+  - CPU
+  - Motherboard
+  - RAM
+  - GPU
+  - Gabinete
+- Lógica implementada en JavaScript:
+  - Selección de componentes por categoría
+  - Cálculo automático del precio total
+- Persistencia de datos mediante:
+  - `localStorage`
+- Funcionalidades:
+  - Reinicio de configuración
+  - Integración con carrito
+- Representa un modelo simplificado de **configurador de productos**.
+
+---
+
+## Características Técnicas Destacadas
+
+- Arquitectura basada en **frontend puro (sin backend)**.
+- Uso de **JavaScript vanilla** para lógica de negocio.
+- Persistencia local con `localStorage`.
+- Separación de responsabilidades:
+  - Datos → `JSON`
+  - Lógica → `JS`
+  - Presentación → `HTML/CSS`
+- Interfaz orientada a experiencia de usuario (UX/UI moderna).
+
+---
 <!-- Badges / Botones de lenguajes -->
 
 [![HTML](https://img.shields.io/badge/HTML-%23E34F26?style=for-the-badge&logo=html5&logoColor=white)](./index.html) [![CSS](https://img.shields.io/badge/CSS-%231572B6?style=for-the-badge&logo=css3&logoColor=white)](styles/estilo.css) [![JavaScript](https://img.shields.io/badge/JavaScript-%23F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](js/script.js)
